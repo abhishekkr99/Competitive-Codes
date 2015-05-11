@@ -1,0 +1,45 @@
+// SHAKY99
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long  
+#define getcx getchar_unlocked
+
+inline ll inp()
+{
+char g=0;
+ll f=0;
+while((g=getchar_unlocked())<48);
+f=f*10+g-48;
+while((g=getchar_unlocked())>=48)
+f=f*10+g-48;
+return f;
+}
+
+int a[10000001];
+
+ll func(ll n) {
+	if (n <= 0) {
+		return 0;
+	}
+	if (n < 10000000) {
+		if (a[n] == -1) {
+			a[n] = max(func(n/2) + func(n / 3) + func(n / 4), n);
+		}
+		return a[n];
+	} else {
+		return max(func(n/2)+ func(n/3)+func(n/4), n);
+	}
+}
+
+int main() {
+	ll n;
+
+	while (scanf("%ld", &n) != EOF) {
+		memset(a, -1, sizeof(a) / sizeof(ll));
+//		cout << a[1000000] << "\n";
+		printf("%ld\n", func(n));
+	}
+}
